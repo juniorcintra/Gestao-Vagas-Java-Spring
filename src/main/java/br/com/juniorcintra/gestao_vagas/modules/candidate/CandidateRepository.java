@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CandidateRepository extends JpaRepository<CandidateEntity, UUID> {
   Optional<CandidateEntity> findByEmailOrUsername(String email, String username);
+
+  Optional<CandidateEntity> findByUsername(String username);
 }

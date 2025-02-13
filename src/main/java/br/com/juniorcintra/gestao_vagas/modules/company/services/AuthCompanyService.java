@@ -31,11 +31,11 @@ public class AuthCompanyService {
           throw new UsernameNotFoundException("Company not found!");
         });
 
-    var passwordMathes =
+    var passwordMatches =
         this.passwordEncoder.matches(authCompanyDTO.getPassword(), company.getPassword());
 
-    if (!passwordMathes) {
-      throw new UsernameNotFoundException("Senha incorreta!");
+    if (!passwordMatches) {
+      throw new AuthenticationException("Senha incorreta!");
     }
 
     Algorithm algorithm = Algorithm.HMAC256(secretKey);
