@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.juniorcintra</groupId>
 	<artifactId>gestao_vagas</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>gestao_vagas</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -50,6 +50,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 		<dependency>
