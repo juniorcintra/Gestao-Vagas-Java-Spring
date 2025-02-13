@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.juniorcintra.gestao_vagas.modules.candidate.CandidateEntity;
-import br.com.juniorcintra.gestao_vagas.modules.candidate.services.UserService;
+import br.com.juniorcintra.gestao_vagas.modules.candidate.services.CandidateService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -15,13 +15,13 @@ import jakarta.validation.Valid;
 public class CandidateController {
 
   @Autowired
-  private UserService userService;
+  private CandidateService candidateService;
 
   @PostMapping()
   public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
 
     try {
-      var result = this.userService.create(candidateEntity);
+      var result = this.candidateService.create(candidateEntity);
 
       return ResponseEntity.ok().body(result);
     } catch (Exception e) {

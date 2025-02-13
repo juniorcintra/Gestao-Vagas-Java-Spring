@@ -8,7 +8,7 @@ import br.com.juniorcintra.gestao_vagas.modules.candidate.CandidateEntity;
 import br.com.juniorcintra.gestao_vagas.modules.candidate.CandidateRepository;
 
 @Service
-public class UserService {
+public class CandidateService {
 
   @Autowired
   private CandidateRepository candidateRepository;
