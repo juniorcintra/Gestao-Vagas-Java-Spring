@@ -1,5 +1,7 @@
 package br.com.juniorcintra.gestao_vagas.modules.company.services;
 
+import java.time.Duration;
+import java.time.Instant;
 import javax.naming.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,7 +40,8 @@ public class AuthCompanyService {
 
     Algorithm algorithm = Algorithm.HMAC256(secretKey);
     var token =
-        JWT.create().withIssuer("javagas").withSubject(company.getId().toString()).sign(algorithm);
+        JWT.create().withIssuer("javagas").withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
+            .withSubject(company.getId().toString()).sign(algorithm);
     return token;
   }
 }
