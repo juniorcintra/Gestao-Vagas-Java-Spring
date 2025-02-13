@@ -12,7 +12,7 @@ public class UserService {
   @Autowired
   private CandidateRepository candidateRepository;
 
-  public CandidateEntity execute(CandidateEntity candidateEntity) {
+  public CandidateEntity create(CandidateEntity candidateEntity) {
     this.candidateRepository
         .findByEmailOrUsername(candidateEntity.getEmail(), candidateEntity.getUsername())
         .ifPresent(user -> {
