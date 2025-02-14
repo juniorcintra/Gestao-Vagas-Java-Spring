@@ -3,6 +3,7 @@ package br.com.juniorcintra.gestao_vagas.modules.company.entities;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import org.hibernate.annotations.CreationTimestamp;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,9 +26,17 @@ public class JobEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
+
+  @Schema(description = "Título da vaga", required = true, example = "Desenvolvedor Java")
   private String title;
+
+  @Schema(description = "Descrição da vaga", required = true, example = "Desenvolvedor Java")
   private String description;
+
+  @Schema(description = "Benefícios da vaga", required = true, example = "VR,VA,Plano de saude")
   private String benefits;
+
+  @Schema(description = "Level da vaga", required = true, example = "Junior,Pleno,Senior")
   private String level;
 
   @ManyToOne()

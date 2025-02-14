@@ -48,6 +48,14 @@ public class CompanyController {
 
   @PostMapping("/job")
   @PreAuthorize("hasRole('COMPANY')")
+  @Tag(name = "Vagas", description = "Criação de vaga")
+  @Operation(summary = "Criação de vaga", description = "Criação de vaga")
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", description = "Criação de vaga", content = {
+          @Content(schema = @Schema(implementation = JobEntity.class))
+      })
+  })
+  @SecurityRequirement(name = "bearerAuth")
   public ResponseEntity<Object> create(@Valid @RequestBody CreateJobDTO jobDTO,
       HttpServletRequest request) {
 
