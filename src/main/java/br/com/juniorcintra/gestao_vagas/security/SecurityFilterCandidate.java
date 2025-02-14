@@ -24,7 +24,6 @@ public class SecurityFilterCandidate extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
       FilterChain filterChain) throws ServletException, IOException {
 
-    SecurityContextHolder.getContext().setAuthentication(null);
     String header = request.getHeader("Authorization");
 
     if (request.getRequestURI().contains("candidate")) {
@@ -39,8 +38,9 @@ public class SecurityFilterCandidate extends OncePerRequestFilter {
 
         var roles = token.getClaim("roles").asList(Object.class);
 
-        var grants =
-            roles.stream().map(role -> new SimpleGrantedAuthority(role.toString())).toList();
+        var grants = roles.stream()
+            .map(role -> new SimpleGrantedAuthority("ROLE_" + role.toString().toUpperCase()))
+            .toList();
 
         UsernamePasswordAuthenticationToken auth =
             new UsernamePasswordAuthenticationToken(token.getSubject(), null, grants);
