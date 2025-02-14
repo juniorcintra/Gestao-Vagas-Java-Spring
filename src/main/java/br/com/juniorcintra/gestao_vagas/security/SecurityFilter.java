@@ -1,7 +1,6 @@
 package br.com.juniorcintra.gestao_vagas.security;
 
 import java.io.IOException;
-import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,6 +19,7 @@ public class SecurityFilter extends OncePerRequestFilter {
   @Autowired
   private JWTProvider jwtProvider;
 
+  @SuppressWarnings("null")
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
       FilterChain filterChain) throws ServletException, IOException {

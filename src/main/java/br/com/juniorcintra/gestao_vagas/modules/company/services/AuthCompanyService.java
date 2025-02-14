@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import br.com.juniorcintra.gestao_vagas.modules.candidate.dto.AuthCandidateResponseDTO;
 import br.com.juniorcintra.gestao_vagas.modules.company.dto.AuthCompanyDTO;
 import br.com.juniorcintra.gestao_vagas.modules.company.dto.AuthCompanyResponseDTO;
 import br.com.juniorcintra.gestao_vagas.modules.company.repositories.CompanyRepository;
