@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -71,11 +72,10 @@ public class CompanyController {
   @PreAuthorize("hasRole('CANDIDATE')")
   @Tag(name = "Vagas", description = "Listagem de vagas")
   @Operation(summary = "Listagem de vagas", description = "Listagem de vagas")
-  @ApiResponses({
-      @ApiResponse(responseCode = "200", description = "Listagem de vagas",
-          content = {
-              @Content(array = @ArraySchema(schema = @Schema(implementation = JobEntity.class)))}),
-      @ApiResponse(responseCode = "500", description = "Internal Server Error")})
+  @ApiResponses({@ApiResponse(responseCode = "200", description = "Listagem de vagas",
+      content = {
+          @Content(array = @ArraySchema(schema = @Schema(implementation = JobEntity.class)))})})
+  @SecurityRequirement(name = "bearerAuth")
   public List<JobEntity> listAllJobsByFilter(@RequestParam String description) {
     return this.companyService.listAllJobs(description);
   }

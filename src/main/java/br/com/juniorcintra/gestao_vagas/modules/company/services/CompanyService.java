@@ -40,6 +40,6 @@ public class CompanyService {
   }
 
   public List<JobEntity> listAllJobs(String description) {
-    return this.jobRepository.findByDescriptionContaining(description);
+    return this.jobRepository.findByDescriptionContainingIgnoreCase(description);
   }
 }
