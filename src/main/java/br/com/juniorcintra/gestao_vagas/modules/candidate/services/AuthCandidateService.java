@@ -3,6 +3,7 @@ package br.com.juniorcintra.gestao_vagas.modules.candidate.services;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Date;
 import javax.naming.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,12 +44,13 @@ public class AuthCandidateService {
     }
 
     Algorithm algorithm = Algorithm.HMAC256(secretKey);
-    var token =
-        JWT.create().withIssuer("javagas").withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
-            .withClaim("roles", Arrays.asList("candidate")).withSubject(user.getId().toString())
-            .sign(algorithm);
+    var expiresIn = Instant.now().plus(Duration.ofHours(2));
+    var token = JWT.create().withIssuer("javagas").withExpiresAt(expiresIn)
+        .withClaim("roles", Arrays.asList("candidate")).withSubject(user.getId().toString())
+        .sign(algorithm);
 
-    var authCandidateResponse = AuthCandidateResponseDTO.builder().access_token(token).build();
+    var authCandidateResponse = AuthCandidateResponseDTO.builder().access_token(token)
+        .expires_in(expiresIn.toEpochMilli()).build();
 
     return authCandidateResponse;
   }

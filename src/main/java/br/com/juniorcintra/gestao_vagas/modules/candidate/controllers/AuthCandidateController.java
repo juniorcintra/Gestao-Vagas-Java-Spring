@@ -1,5 +1,4 @@
-package br.com.juniorcintra.gestao_vagas.modules.company.controllers;
-
+package br.com.juniorcintra.gestao_vagas.modules.candidate.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,21 +7,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.juniorcintra.gestao_vagas.modules.company.dto.AuthCompanyDTO;
-import br.com.juniorcintra.gestao_vagas.modules.company.services.AuthCompanyService;
+import br.com.juniorcintra.gestao_vagas.modules.candidate.dto.AuthCandidateDTO;
+import br.com.juniorcintra.gestao_vagas.modules.candidate.services.AuthCandidateService;
 
 @RestController
-@RequestMapping("/auth-company")
-public class AuthCompanyController {
-
+@RequestMapping("/auth-candidate")
+public class AuthCandidateController {
 
   @Autowired
-  private AuthCompanyService authCompanyService;
+  private AuthCandidateService authCandidateService;
 
   @PostMapping()
-  public ResponseEntity<Object> auth(@RequestBody AuthCompanyDTO authCompanyDTO) {
+  public ResponseEntity<Object> auth(@RequestBody AuthCandidateDTO authCandidateDTO) {
     try {
-      var result = this.authCompanyService.execute(authCompanyDTO);
+      var result = this.authCandidateService.execute(authCandidateDTO);
 
       return ResponseEntity.ok().body(result);
     } catch (Exception e) {
