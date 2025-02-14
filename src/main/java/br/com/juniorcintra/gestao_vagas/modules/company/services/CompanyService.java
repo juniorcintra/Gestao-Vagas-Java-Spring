@@ -1,5 +1,6 @@
 package br.com.juniorcintra.gestao_vagas.modules.company.services;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,9 @@ public class CompanyService {
 
   public JobEntity createJob(JobEntity jobEntity) {
     return this.jobRepository.save(jobEntity);
+  }
+
+  public List<JobEntity> listAllJobs(String description) {
+    return this.jobRepository.findByDescriptionContaining(description);
   }
 }

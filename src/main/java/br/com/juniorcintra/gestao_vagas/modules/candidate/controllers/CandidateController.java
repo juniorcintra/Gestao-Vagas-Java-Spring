@@ -23,7 +23,6 @@ public class CandidateController {
 
   @PostMapping()
   public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
-
     try {
       var result = this.candidateService.create(candidateEntity);
 
@@ -37,7 +36,6 @@ public class CandidateController {
   @GetMapping()
   @PreAuthorize("hasRole('CANDIDATE')")
   public ResponseEntity<Object> getProfile(HttpServletRequest request) {
-
     var candidateId = request.getAttribute("candidate_id");
     try {
       var profile = this.candidateService.getProfile(UUID.fromString(candidateId.toString()));
