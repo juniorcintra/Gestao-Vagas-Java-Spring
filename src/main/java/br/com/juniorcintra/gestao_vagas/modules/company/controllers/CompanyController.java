@@ -72,9 +72,11 @@ public class CompanyController {
   @PreAuthorize("hasRole('CANDIDATE')")
   @Tag(name = "Vagas", description = "Listagem de vagas")
   @Operation(summary = "Listagem de vagas", description = "Listagem de vagas")
-  @ApiResponses({@ApiResponse(responseCode = "200", description = "Listagem de vagas",
-      content = {
-          @Content(array = @ArraySchema(schema = @Schema(implementation = JobEntity.class)))})})
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", description = "Listagem de vagas", content = {
+          @Content(array = @ArraySchema(schema = @Schema(implementation = JobEntity.class)))
+      })
+  })
   @SecurityRequirement(name = "bearerAuth")
   public List<JobEntity> listAllJobsByFilter(@RequestParam String description) {
     return this.companyService.listAllJobs(description);

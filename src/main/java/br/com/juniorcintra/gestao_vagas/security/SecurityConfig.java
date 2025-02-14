@@ -20,8 +20,9 @@ public class SecurityConfig {
   @Autowired
   private SecurityFilterCandidate securityFilterCandidate;
 
-  private static final String[] SWAGGER_LIST =
-      {"/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**"};
+  private static final String[] SWAGGER_LIST = {
+      "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**"
+  };
 
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
