@@ -15,6 +15,13 @@ import br.com.juniorcintra.gestao_vagas.modules.company.dto.CreateJobDTO;
 import br.com.juniorcintra.gestao_vagas.modules.company.entities.CompanyEntity;
 import br.com.juniorcintra.gestao_vagas.modules.company.entities.JobEntity;
 import br.com.juniorcintra.gestao_vagas.modules.company.services.CompanyService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
@@ -60,8 +67,15 @@ public class CompanyController {
 
   }
 
-  @PreAuthorize("hasRole('CANDIDATE')")
   @GetMapping("/jobs")
+  @PreAuthorize("hasRole('CANDIDATE')")
+  @Tag(name = "Vagas", description = "Listagem de vagas")
+  @Operation(summary = "Listagem de vagas", description = "Listagem de vagas")
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", description = "Listagem de vagas",
+          content = {
+              @Content(array = @ArraySchema(schema = @Schema(implementation = JobEntity.class)))}),
+      @ApiResponse(responseCode = "500", description = "Internal Server Error")})
   public List<JobEntity> listAllJobsByFilter(@RequestParam String description) {
     return this.companyService.listAllJobs(description);
   }
