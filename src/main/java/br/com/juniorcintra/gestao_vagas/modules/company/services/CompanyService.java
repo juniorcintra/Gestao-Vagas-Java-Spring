@@ -5,7 +5,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.com.juniorcintra.gestao_vagas.exceptions.UserFoundException;
 import br.com.juniorcintra.gestao_vagas.modules.company.entities.CompanyEntity;
+import br.com.juniorcintra.gestao_vagas.modules.company.entities.JobEntity;
 import br.com.juniorcintra.gestao_vagas.modules.company.repositories.CompanyRepository;
+import br.com.juniorcintra.gestao_vagas.modules.company.repositories.JobRepository;
 
 @Service
 public class CompanyService {
@@ -15,6 +17,9 @@ public class CompanyService {
 
   @Autowired
   private PasswordEncoder passwordEncoder;
+
+  @Autowired
+  private JobRepository jobRepository;
 
   public CompanyEntity create(CompanyEntity companyEntity) {
     this.companyRepository
@@ -27,5 +32,9 @@ public class CompanyService {
     companyEntity.setPassword(password);
 
     return this.companyRepository.save(companyEntity);
+  }
+
+  public JobEntity createJob(JobEntity jobEntity) {
+    return this.jobRepository.save(jobEntity);
   }
 }

@@ -47,7 +47,6 @@ public class AuthCandidateService {
     var token = JWT.create().withIssuer("javagas").withExpiresAt(expiresIn)
         .withClaim("roles", Arrays.asList("CANDIDATE")).withSubject(user.getId().toString())
         .sign(algorithm);
-
     var authCandidateResponse = AuthCandidateResponseDTO.builder().access_token(token)
         .expires_in(expiresIn.toEpochMilli()).build();
 
