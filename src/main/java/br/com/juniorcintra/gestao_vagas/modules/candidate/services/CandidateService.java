@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.juniorcintra.gestao_vagas.exceptions.JobNotFoundException;
 import br.com.juniorcintra.gestao_vagas.exceptions.UserFoundException;
 import br.com.juniorcintra.gestao_vagas.exceptions.UserNotFoundException;
+import br.com.juniorcintra.gestao_vagas.modules.candidate.entity.ApplyJobEntity;
 import br.com.juniorcintra.gestao_vagas.modules.candidate.entity.CandidateEntity;
 import br.com.juniorcintra.gestao_vagas.modules.candidate.repository.ApplyJobRepository;
 import br.com.juniorcintra.gestao_vagas.modules.candidate.repository.CandidateRepository;
@@ -48,16 +49,18 @@ public class CandidateService {
     return candidate;
   }
 
-  public void applyToJob(UUID candidateId, UUID jobId) {
-    var candidate = this.candidateRepository.findById(candidateId).orElseThrow(() -> {
+  public ApplyJobEntity applyToJob(UUID candidateId, UUID jobId) {
+    this.candidateRepository.findById(candidateId).orElseThrow(() -> {
       throw new UserNotFoundException();
     });
 
-    var job = this.jobRepository.findById(jobId).orElseThrow(() -> {
+    this.jobRepository.findById(jobId).orElseThrow(() -> {
       throw new JobNotFoundException();
     });
 
+    var applyJob = ApplyJobEntity.builder().candidateId(candidateId).jobId(jobId).build();
 
-
+    applyJob = applyJobRepository.save(applyJob);
+    return applyJob;
   }
 }
