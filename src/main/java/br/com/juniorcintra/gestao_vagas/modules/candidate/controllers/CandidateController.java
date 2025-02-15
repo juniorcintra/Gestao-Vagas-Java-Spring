@@ -71,5 +71,24 @@ public class CandidateController {
   }
 
 
+  @PostMapping("/apply")
+  @PreAuthorize("hasRole('CANDIDATE')")
+  @Operation(summary = "Aplicação de vaga",
+      description = "Essa função é responsável por realizar a aplicação de uma vaga")
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", description = "Informações do candidato", content = {
+          @Content(schema = @Schema(implementation = CandidateEntity.class))
+      }), @ApiResponse(responseCode = "400", description = "User not found!")
+  })
+  @SecurityRequirement(name = "bearerAuth")
+  public ResponseEntity<Object> applyToJob(HttpServletRequest request, @RequestBody UUID jobId) {
+    try {
+      var candidateId = request.getAttribute("candidate_id");
+      var result = this.candidateService.applyToJob(UUID.fromString(candidateId.toString()), jobId);
 
+      return ResponseEntity.ok().body(result);
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
+  }
 }
