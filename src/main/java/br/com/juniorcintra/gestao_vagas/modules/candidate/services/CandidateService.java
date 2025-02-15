@@ -3,7 +3,6 @@ package br.com.juniorcintra.gestao_vagas.modules.candidate.services;
 import java.util.UUID;
 import javax.naming.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.com.juniorcintra.gestao_vagas.exceptions.JobNotFoundException;
