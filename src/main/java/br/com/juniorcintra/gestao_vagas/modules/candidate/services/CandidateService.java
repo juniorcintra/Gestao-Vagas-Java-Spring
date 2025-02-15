@@ -42,9 +42,10 @@ public class CandidateService {
     return this.candidateRepository.save(candidateEntity);
   }
 
-  public CandidateEntity getProfile(UUID id) throws AuthenticationException {
-    var candidate =
-        this.candidateRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
+  public CandidateEntity getProfile(UUID id) {
+    var candidate = this.candidateRepository.findById(id).orElseThrow(() -> {
+      throw new UserNotFoundException();
+    });
 
     return candidate;
   }
