@@ -6,15 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import br.com.juniorcintra.gestao_vagas.exceptions.JobNotFoundException;
 import br.com.juniorcintra.gestao_vagas.exceptions.UserFoundException;
+import br.com.juniorcintra.gestao_vagas.exceptions.UserNotFoundException;
 import br.com.juniorcintra.gestao_vagas.modules.candidate.CandidateEntity;
 import br.com.juniorcintra.gestao_vagas.modules.candidate.CandidateRepository;
+import br.com.juniorcintra.gestao_vagas.modules.company.repositories.JobRepository;
 
 @Service
 public class CandidateService {
 
   @Autowired
   private CandidateRepository candidateRepository;
+
+  @Autowired
+  private JobRepository jobRepository;
 
   @Autowired
   private PasswordEncoder passwordEncoder;
@@ -33,9 +39,22 @@ public class CandidateService {
   }
 
   public CandidateEntity getProfile(UUID id) throws AuthenticationException {
-    var candidate = this.candidateRepository.findById(id)
-        .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+    var candidate =
+        this.candidateRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
 
     return candidate;
+  }
+
+  public void applyToJob(UUID candidateId, UUID jobId) {
+    var candidate = this.candidateRepository.findById(candidateId).orElseThrow(() -> {
+      throw new UserNotFoundException();
+    });
+
+    var job = this.jobRepository.findById(jobId).orElseThrow(() -> {
+      throw new JobNotFoundException();
+    });
+
+
+
   }
 }

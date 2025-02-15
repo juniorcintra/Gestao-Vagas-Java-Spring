@@ -69,4 +69,7 @@ public class CandidateController {
       return ResponseEntity.badRequest().body(e.getMessage());
     }
   }
+
+
+
 }
