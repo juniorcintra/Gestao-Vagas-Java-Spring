@@ -1,7 +1,6 @@
 package br.com.juniorcintra.gestao_vagas.modules.candidate.services;
 
 import java.util.UUID;
-import javax.naming.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

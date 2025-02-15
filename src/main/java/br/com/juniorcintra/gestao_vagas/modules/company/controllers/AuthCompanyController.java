@@ -1,6 +1,5 @@
 package br.com.juniorcintra.gestao_vagas.modules.company.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import br.com.juniorcintra.gestao_vagas.modules.company.services.AuthCompanyServ
 @RestController
 @RequestMapping("/auth-company")
 public class AuthCompanyController {
-
 
   @Autowired
   private AuthCompanyService authCompanyService;
