@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 import br.com.juniorcintra.gestao_vagas.exceptions.JobNotFoundException;
 import br.com.juniorcintra.gestao_vagas.exceptions.UserFoundException;
 import br.com.juniorcintra.gestao_vagas.exceptions.UserNotFoundException;
-import br.com.juniorcintra.gestao_vagas.modules.candidate.CandidateEntity;
-import br.com.juniorcintra.gestao_vagas.modules.candidate.CandidateRepository;
+import br.com.juniorcintra.gestao_vagas.modules.candidate.entity.CandidateEntity;
+import br.com.juniorcintra.gestao_vagas.modules.candidate.repository.ApplyJobRepository;
+import br.com.juniorcintra.gestao_vagas.modules.candidate.repository.CandidateRepository;
 import br.com.juniorcintra.gestao_vagas.modules.company.repositories.JobRepository;
 
 @Service
@@ -23,6 +24,9 @@ public class CandidateService {
 
   @Autowired
   private PasswordEncoder passwordEncoder;
+
+  @Autowired
+  private ApplyJobRepository applyJobRepository;
 
   public CandidateEntity create(CandidateEntity candidateEntity) {
     this.candidateRepository

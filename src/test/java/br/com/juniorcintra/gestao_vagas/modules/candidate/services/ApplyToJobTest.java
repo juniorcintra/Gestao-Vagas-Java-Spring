@@ -1,7 +1,6 @@
 package br.com.juniorcintra.gestao_vagas.modules.candidate.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import java.util.Optional;
 import java.util.UUID;
@@ -13,8 +12,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import br.com.juniorcintra.gestao_vagas.exceptions.JobNotFoundException;
 import br.com.juniorcintra.gestao_vagas.exceptions.UserNotFoundException;
-import br.com.juniorcintra.gestao_vagas.modules.candidate.CandidateEntity;
-import br.com.juniorcintra.gestao_vagas.modules.candidate.CandidateRepository;
+import br.com.juniorcintra.gestao_vagas.modules.candidate.entity.CandidateEntity;
+import br.com.juniorcintra.gestao_vagas.modules.candidate.repository.CandidateRepository;
 import br.com.juniorcintra.gestao_vagas.modules.company.repositories.JobRepository;
 
 @ExtendWith(MockitoExtension.class)
