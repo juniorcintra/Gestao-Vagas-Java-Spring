@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import br.com.juniorcintra.gestao_vagas.exceptions.CompanyNotFoundException;
 import br.com.juniorcintra.gestao_vagas.exceptions.UserFoundException;
 import br.com.juniorcintra.gestao_vagas.modules.company.entities.CompanyEntity;
 import br.com.juniorcintra.gestao_vagas.modules.company.entities.JobEntity;
@@ -36,6 +37,10 @@ public class CompanyService {
   }
 
   public JobEntity createJob(JobEntity jobEntity) {
+    companyRepository.findById(jobEntity.getCompanyId()).orElseThrow(() -> {
+      throw new CompanyNotFoundException();
+    });
+
     return this.jobRepository.save(jobEntity);
   }
 

@@ -58,14 +58,12 @@ public class CompanyController {
   @SecurityRequirement(name = "bearerAuth")
   public ResponseEntity<Object> create(@Valid @RequestBody CreateJobDTO jobDTO,
       HttpServletRequest request) {
+    var companyId = request.getAttribute("company_id");
 
     try {
-      var companyId = request.getAttribute("company_id");
-
       var jobEntity = JobEntity.builder().title(jobDTO.getTitle())
           .companyId(UUID.fromString(companyId.toString())).description(jobDTO.getDescription())
           .benefits(jobDTO.getBenefits()).level(jobDTO.getLevel()).build();
-
 
       var result = this.companyService.createJob(jobEntity);
 
@@ -89,5 +87,4 @@ public class CompanyController {
   public List<JobEntity> listAllJobsByFilter(@RequestParam String description) {
     return this.companyService.listAllJobs(description);
   }
-
 }
