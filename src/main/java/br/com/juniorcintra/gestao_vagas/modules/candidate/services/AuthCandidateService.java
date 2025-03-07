@@ -42,13 +42,14 @@ public class AuthCandidateService {
       throw new AuthenticationException("Senha incorreta!");
     }
 
+    var roles = Arrays.asList("CANDIDATE");
+
     Algorithm algorithm = Algorithm.HMAC256(secretKey);
     var expiresIn = Instant.now().plus(Duration.ofHours(2));
     var token = JWT.create().withIssuer("javagas").withExpiresAt(expiresIn)
-        .withClaim("roles", Arrays.asList("CANDIDATE")).withSubject(user.getId().toString())
-        .sign(algorithm);
+        .withClaim("roles", roles).withSubject(user.getId().toString()).sign(algorithm);
     var authCandidateResponse = AuthCandidateResponseDTO.builder().access_token(token)
-        .expires_in(expiresIn.toEpochMilli()).build();
+        .expires_in(expiresIn.toEpochMilli()).roles(roles).build();
 
     return authCandidateResponse;
   }
